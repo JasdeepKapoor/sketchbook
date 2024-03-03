@@ -1,0 +1,43 @@
+.menuContainer{
+    @apply flex top-10 left-1/2 absolute justify-between rounded-md p-1;
+    border: 1px solid theme('colors.border1');
+    transform: translateX(-50%);
+    box-shadow: theme('colors.shadow1');
+    background-color: theme('colors.background1');
+
+    .iconWrapper{
+        @apply w-10 h-10 mr-3 ml-3 justify-center items-center flex cursor-pointer;
+    
+    
+        &:hover, .active{
+            background-color: theme('colors.text2');
+        }
+
+      .icon{
+        color: theme('colors.text1');
+        font-size: 20px;
+      }  
+    }
+}
+
+.toolkitContainer{
+  @apply w-64 absolute top-1/4 left-10 p-5 rounded-md;
+  border: 1px solid theme('colors.border1');
+  box-shadow: theme('colors.shadow1');
+  background-color: theme('colors.background1');
+
+  .toolkitColorContainer{
+    @apply flex mt-2 justify-between rounded-sm mb-2;
+    span{
+      @apply w-5 h-5 cursor-pointer;
+
+      &:hover, .active{
+        border:1.5px solid theme('colors.border2');
+        box-shadow: theme('colors.shadow2');
+
+      
+      }
+    }
+  }
+}
+
