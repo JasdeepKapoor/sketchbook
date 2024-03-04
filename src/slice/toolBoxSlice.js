@@ -4,38 +4,36 @@ import { MENU_ITEMS } from '@/constants';
 
 const initialState = {
 
- menuItemClick:MENU_ITEMS.PENCIL,
- actionItemClick:null,
- showColorPalette:true
+[MENU_ITEMS.PENCIL]:{
+    color:'black',
+    size:3
+},
+[MENU_ITEMS.ERASER]:{
+    color:'white',
+    size:3
+},
+[MENU_ITEMS.UNDO]:{},
+[MENU_ITEMS.REDO]:{},
+[MENU_ITEMS.DOWNLOAD]:{},
 };
 
 // Create a slice
-const menuSlice = createSlice({
-  name: 'menuSlice', 
+const toolboxSlice = createSlice({
+  name: 'toolboxSlice', 
   initialState, 
   reducers: {
     // Reducers go here
-   menuItemClick: (state,action)=>{
-      state.menuOption=action.payload
-      if(action.payload == MENU_ITEMS.ERASER) {
-        if(state.showColorPalette){
-          state.showColorPalette=false
-        }
-      }
-      else{
-        if(!state.showColorPalette) {
-          state.showColorPalette= true
-        }
-      }
+    changeColor:(state,action)=>{
+        state[action.payload.item].color= action.payload.color
     },
-    actionItemClick:(state,action)=>{
-      state.actionItemClick= action.payload
+    changeSize:(state,action)=>{
+        state[action.payload.item].size= action.payload.size
     }
   },
 });
 
 // Export the actions
-export const {menuItemClick, actionItemClick} = menuSlice.actions;
+export const {changeColor, changeSize} = toolboxSlice.actions;
 
 // Export the reducer
-export default menuSlice.reducer;
+export default toolboxSlice.reducer;
