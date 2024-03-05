@@ -16,6 +16,10 @@ const handleMenuClick=(item)=>{
   dispatch(menuItemClick(item))
 }
 
+const handleActionClick=(item)=>{
+  dispatch(actionItemClick(item))
+}
+
 
   return (
     <div className={styles.menuContainer}>
@@ -25,13 +29,13 @@ const handleMenuClick=(item)=>{
         <div className={classNames(styles.iconWrapper,{[styles.active]: activeMenuItem=== MENU_ITEMS.ERASER })} onClick={()=>handleMenuClick(MENU_ITEMS.ERASER)}>
         <FontAwesomeIcon className={styles.icon} icon={faEraser} />
         </div>
-        <div className={styles.iconWrapper} >
+        <div className={styles.iconWrapper} onClick={()=>handleActionClick(MENU_ITEMS.UNDO)} >
         <FontAwesomeIcon className={styles.icon}  icon={faRotateLeft} />
         </div>
-        <div className={styles.iconWrapper} >
+        <div className={styles.iconWrapper} onClick={()=>handleActionClick(MENU_ITEMS.REDO)} >
         <FontAwesomeIcon className={styles.icon}   icon={faRotateRight} />
         </div>
-        <div className={styles.iconWrapper} >
+        <div className={styles.iconWrapper} onClick={()=>handleActionClick(MENU_ITEMS.DOWNLOAD)} >
         <FontAwesomeIcon className={styles.icon}  icon={faFileArrowDown} />
         </div>
     </div>
