@@ -1,4 +1,4 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPencil,faEraser,faRotateLeft,faRotateRight,faFileArrowDown } from '@fortawesome/free-solid-svg-icons'
 import styles from './index.module.css'
@@ -6,18 +6,30 @@ import { actionItemClick,menuItemClick } from '@/slice/menuSlice'
 import { MENU_ITEMS } from '@/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
+import { socket } from '@/socket'
 
 export default function Menu() {
 
   const activeMenuItem= useSelector((state)=> state.menu.activeMenuItem)
   const dispatch= useDispatch()
+  useEffect(()=>{
+    socket.on("changeMenu",(arg)=>{
+      dispatch(menuItemClick(arg))
+    })
+
+    return ()=>{
+      socket.off("changeMenu")
+    }
+  },[])
 
 const handleMenuClick=(item)=>{
   dispatch(menuItemClick(item))
+  socket.emit("changeMenu",item)
 }
 
 const handleActionClick=(item)=>{
   dispatch(actionItemClick(item))
+
 }
 
 

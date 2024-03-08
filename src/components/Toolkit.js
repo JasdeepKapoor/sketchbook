@@ -4,6 +4,7 @@ import { COLORS } from '@/constants'
 import { useDispatch, useSelector } from 'react-redux'
 import { changeColor,changeSize } from '@/slice/toolboxSlice'
 import classNames from 'classnames'
+import { socket } from '@/socket'
 
 function Toolkit() {
 
@@ -12,12 +13,30 @@ function Toolkit() {
     const activeMenuItem= useSelector((state)=> state.menu.activeMenuItem)
     const {size,color}= useSelector((state)=> state.toolbox[activeMenuItem])
     const dispatch= useDispatch()
+
+    useEffect(()=>{
+      socket.on("changeColor",(arg)=>{
+        dispatch(changeColor({item:activeMenuItem,color:arg.color}))
+      })
+
+      socket.on("changeSize",(arg)=>{
+        dispatch(changeSize({item:activeMenuItem,size:arg.size}))
+      })
+
+      return ()=>{
+        socket.off("changeColor")
+        socket.off("changeSize")
+      }
+    },[])
+
     
     const handleColorChange =(color)=>{
       dispatch(changeColor({item:activeMenuItem,color:color}))
+      socket.emit("changeColor",{color})
     }
     const handleSizeChange=(e)=>{
       dispatch(changeSize({item:activeMenuItem,size:e.target.value}))
+      socket.emit("changeSize",{size:e.target.value})
     }
 
     
