@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import styles from './index.module.css'
 import { COLORS } from '@/constants'
 import { useDispatch, useSelector } from 'react-redux'
-import { changeColor,changeSize } from '@/slice/toolboxSlice'
+import { changeColor,changeSize } from '@/slice/toolSlice'
 import classNames from 'classnames'
 import { socket } from '@/socket'
 

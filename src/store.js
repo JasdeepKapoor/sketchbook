@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 import menuReducer from './slice/menuSlice'
-import toolboxSlice from "./slice/toolboxSlice";
+import toolboxSlice from './slice/toolSlice';
 
 const store= configureStore({
    reducer:{
